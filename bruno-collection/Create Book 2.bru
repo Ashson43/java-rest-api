@@ -1,0 +1,18 @@
+meta {
+  name: Create Book 2
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/books
+  body: json
+  auth: inherit
+}
+
+body:json {
+   {
+      "title": "Found Vrushank",
+      "author": "Vrushank Joshi"
+    }
+}

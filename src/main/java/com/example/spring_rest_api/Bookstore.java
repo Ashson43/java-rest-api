@@ -1,16 +1,24 @@
+package com.example.spring_rest_api;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Bookstore {
+    int id = 1;
     private List<Book> bookList = new ArrayList<>();
 
-    public void addBook(Book book) {
+    public Book addBook(Book book) {
+        book.setId(id);
         bookList.add(book);
+
+        
+        id++;
+        return book;
     }
 
-    public Book getBookById(String id) {
+    public Book getBookById(int id) {
         for (Book book : bookList) {
-            if (book.getId().equals(id)) {
+            if (book.getId()==id) {
                 return book;
             }
         }
@@ -23,17 +31,17 @@ public class Bookstore {
 
     public void updateBookById(Book updatedBook) {
         for (Book book : bookList) {
-            if (book.getId().equals(updatedBook.getId())) {
+            if (book.getId()==(updatedBook.getId())) {
                 book.setTitle(updatedBook.getTitle());
                 book.setauthor(updatedBook.getAuthor());
             }
         }
     }
 
-    public void removeBookById(String id) {
+    public void removeBookById(int id) {
         var size = bookList.size();
         for (int i = size - 1; i >= 0; i--) {
-            if (bookList.get(i).getId().equals(id)) {
+            if (bookList.get(i).getId()==id) {
                 bookList.remove(i);
             }
         }

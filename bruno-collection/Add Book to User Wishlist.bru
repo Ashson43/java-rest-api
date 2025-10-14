@@ -1,0 +1,19 @@
+meta {
+  name: Add Book to User Wishlist
+  type: http
+  seq: 13
+}
+
+post {
+  url: http://localhost:8080/users/1/wishlist
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "id":"1",
+    "title":"Still Finding Vrushank",
+    "author":"Vrushank Joshi"
+  }
+}

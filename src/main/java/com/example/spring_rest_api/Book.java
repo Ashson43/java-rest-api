@@ -1,18 +1,19 @@
+package com.example.spring_rest_api;
 
 public class Book {
 
-    private String id;
+    private int id;
     private String title;
     private String author;
 
-    public Book(String id, String title, String author) {
+    public Book(int id, String title, String author) {
         this.id = id;
         this.title = title;
         this.author = author;
 
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -24,7 +25,7 @@ public class Book {
         return author;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
