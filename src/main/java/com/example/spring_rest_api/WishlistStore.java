@@ -24,8 +24,8 @@ public class WishlistStore {
         userWishlist.get(userId).addBookToWishlist(book);
     }
 
-    public void deleteBookFromWishlist(int userId, Book book) {
-        userWishlist.get(userId).removeBookFromWishlist(userId);
+    public void deleteBookFromWishlist(int userId, int bookId) {
+        userWishlist.get(userId).removeBookFromWishlist(bookId);
     }
 
     public Wishlist getWishlistByUserId(int userId) {
