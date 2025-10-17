@@ -1,0 +1,138 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <script src="API.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+
+<body onload="keepCalling()">
+    <h1>BOOKS</h1> 
+    <table class="table">
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>Author</th>
+            <th>Title</th>
+            <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tableBooks">
+
+        </tbody>
+        <tfoot>
+            <td>&nbsp</td>
+            <td><input type="text" id="author"></input></td>
+            <td><input type="text" id="title"></input></td>
+            <td><button onclick='addBook(clearInputs)'> <i class='bi bi-journal-plus'></i></button></td>
+        </tfoot>
+    </table>
+    <br><br>
+    <h1>WISHLIST</h1>
+    <table class="table">
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>Author</th>
+            <th>Title</th>
+            <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tableWishlist">
+
+        </tbody>
+    </table>
+</body>
+<script>
+
+    function keepCalling() {
+        fetchBooks(drawtableBooks);
+        fetchWishlist(drawtableWishlist);
+        setInterval("fetchBooks(drawtableBooks);fetchWishlist(drawtableWishlist)", 5000);
+    }
+
+
+    function drawtableBooks(books) {
+        var table = document.getElementById("tableBooks");
+        table.innerHTML = "";
+        for (var i = 0; i < books.length; i++) {
+            var row = table.insertRow(i);
+            for (var j = 0; j < 4; j++) {
+                var cell = row.insertCell(j);
+                switch (j) {
+                    case 0:
+                        cell.innerHTML = books[i].id;
+                        break;
+                    case 1:
+                        cell.innerHTML = books[i].author;
+                        break;
+                    case 2:
+                        cell.innerHTML = books[i].title;
+                        break;
+                    case 3:
+                        cell.innerHTML = "<button onclick='addBookToWishlist("+i+")'><i class='bi bi-heart'></i></button><button><i class=\"bi bi-pencil-square\"></i></button><button onclick=\"deleteBook("+books[i].id+")\"><i class=\"bi bi-trash3-fill\"></i></button>"
+                        break;
+                }
+
+            }
+        
+        }
+
+    
+
+
+    }
+    function drawtableWishlist(wishlist) {
+        var table = document.getElementById("tableWishlist");
+        table.innerHTML = "";
+        for (var i = 0; i < wishlist.length; i++) {
+            var row = table.insertRow(i);
+            for (var j = 0; j < 4; j++) {
+                var cell = row.insertCell(j);
+                switch (j) {
+                    case 0:
+                        cell.innerHTML = wishlist[i].id;
+                        break;
+                    case 1:
+                        cell.innerHTML = wishlist[i].author;
+                        break;
+                    case 2:
+                        cell.innerHTML = wishlist[i].title;
+                        break;
+                    case 3:
+                        cell.innerHTML = "<button onclick='deleteBookFromWishlist("+wishlist[i].id+")'><i class=\"bi bi-heart-fill\"></i></button>"
+                        break;
+                }
+
+            }
+        }
+        
+
+    }
+    function getAuthor(){
+        return document.getElementById("author").value;
+    }
+
+    function getTitle(){
+        return document.getElementById("title").value;
+    }
+
+    function clearInputs(){
+        document.getElementById("author").value="";
+        document.getElementById("title").value="";
+    }
+
+
+</script>
+
+</html>
